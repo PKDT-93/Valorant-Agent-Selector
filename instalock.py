@@ -1,15 +1,9 @@
-import cv2 as cv
+from instalockgui import InstalockGui
 
-__JETT__ = "agents/jett.png"
-
-def locate_agent(agent:str):
-    image = cv.imread(agent)
-    cv.imshow('Jett', image)
-    cv.waitKey(0)
-
-
+# Main function
+# instalock.py must be run under admin in order properly work.
+def instalock():
+    gui = InstalockGui()
 
 if __name__ == '__main__':
-    locate_agent(__JETT__)
-    
-
+    instalock()
