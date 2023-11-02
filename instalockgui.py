@@ -1,6 +1,7 @@
+import threading
 import tkinter as tk
 import os
-from cv_functions import Thread_instalock
+from cv_functions import Instalock_Agent
 from functools import partial
 
 __MAX_COLUMNS__ = 7
@@ -8,8 +9,13 @@ __MAX_ROWS___ = 7
 __AGENT_FILE_PATH__ = "./agents"
 
 class InstalockGui:
-    def __init__(self):
+    def __init__(self):  
         """Gui Constructor"""
+        readme_text = "• The monitor you play Valorant on must be your primary monitor.\n" \
+                      "• Select the agent you want to instalock, after 1s the window will minimize.\n" \
+                      "• Once an agent has been selected in-game, press the 'Q' key on your keyboard to regain mouse control\n\n"\
+                      "• If all else fails, spam the 'Q' key on your keyboard if your mouse goes out of control"
+                      
         # init Tk obj
         self.window = tk.Tk()
         # Set window size to 800x600
@@ -18,8 +24,8 @@ class InstalockGui:
         self.window.title("Select Agent to Instalock")
         self.__create_rows_columns()
         self.__create_agent_buttons()
-        readme_label = tk.Label(self.window, text="Item")
-        readme_label.grid(row=0, column=0, sticky='n')
+        self.readme_label = tk.Label(self.window, text=readme_text, justify='left', anchor='w', padx=20)
+        self.readme_label.grid(row=0, column=0, columnspan=__MAX_COLUMNS__, sticky='nsew')
         self.window.mainloop()
 
 
@@ -69,7 +75,7 @@ class InstalockGui:
         # Loop through agents folder and create button based on how many agents there are
         for agent in range(agent_count):
             # Use partial to create partial button functions on-click
-            command = partial(Thread_instalock, agent_file_paths[agent])
+            command = partial(self.__thread_instalock, agent_file_paths[agent])
             agent_photo = tk.PhotoImage(file=agent_file_paths[agent])
             button = tk.Button(self.window, image= agent_photo, command=command)
             # Keep a reference to the image to prevent garbage collection
@@ -80,10 +86,13 @@ class InstalockGui:
             if current_column >= max_agent_grid_columns - 1:
                 current_column = 0
                 current_row += 1
-    
 
-    def __change_window_title(self) -> None:
-        self.window.title("Agent Selected")
+
+    def __thread_instalock(self, agent_filepath) -> None:
+        """This wrapper function creates a new thread to handle button clicks for tkinter"""
+        # Minimize window after 1s to avoid opencv from clicking gui portraits
+        self.window.after(1000)
+        threading.Thread(target=Instalock_Agent, args=(agent_filepath,)).start()
         self.window.iconify()
         
 
