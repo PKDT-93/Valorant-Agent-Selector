@@ -9,7 +9,7 @@ This app uses openCV to instalock your Valorant agents. To add new agents, add t
 <br>
 <br>
 ## Instructions
-• The monitor you play Valorant on must be your primary monitor. <br>
+• The monitor you play Valorant on must be set to your primary monitor. <br>
 • Select the agent you want to instalock, after 1s the window will minimize. <br>
 • Once an agent has been selected in-game, press the 'Q' key on your keyboard to regain mouse control <br>
 • If all else fails, spam the 'Q' key on your keyboard if your mouse goes out of control <br>
