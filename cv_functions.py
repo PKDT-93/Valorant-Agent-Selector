@@ -1,4 +1,3 @@
-import threading
 import cv2 as cv
 import keyboard
 import pyautogui
