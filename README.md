@@ -4,7 +4,7 @@ This app uses openCV to instalock your Valorant agents. To add new agents, add t
 
 ## Installation:
 -Make sure python3 is installed <br>
--To run this app, open command prompt/powershell as __ADMIN__ and navigate to the downloaded project directory and type <br> ```python3 instalock.py```. <br>
+-To run this app, open command prompt/powershell as __ADMIN__ and navigate to the downloaded project directory and type <br> ```python3 instalock.py```<br>
 -Ensure that all the pip modules in the requirements.txt file is installed. If pip isn't installed see https://www.activestate.com/resources/quick-reads/how-to-install-pip-on-windows/
 <br>
 <br>
